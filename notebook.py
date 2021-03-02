@@ -1,11 +1,11 @@
+"""
+Notebook module
+"""
 import datetime
-# Store the next available id for all new notes
-last_id = 0
+
+LAST_ID = 0
 class Note:
     '''Represent a note in the notebook. Match against a
-    www.it-ebooks.info
-    Objects in Python
-    [ 52 ]
     string in searches and store tags for each note.
     '''
     def __init__(self, memo, tags=''):
@@ -15,16 +15,18 @@ class Note:
         self.memo = memo
         self.tags = tags
         self.creation_date = datetime.date.today()
-        global last_id
-        last_id += 1
-        self.id = last_id
-    def match(self, filter):
+        global LAST_ID
+        LAST_ID += 1
+        self.id = LAST_ID
+
+
+    def match(self, note_filter):
         '''Determine if this note matches the filter
         text. Return True if it matches, False otherwise.
 
         Search is case sensitive and matches both text and
         tags.'''
-        return filter in self.memo or filter in self.tags
+        return note_filter in self.memo or note_filter in self.tags
 
 
 
@@ -59,8 +61,8 @@ class Notebook:
                 break
 
 
-    def search(self, filter):
+    def search(self, note_filter):
         '''Find all notes that match the given filter
         string.'''
         return [note for note in self.notes if
-                note.match(filter)]
+                note.match(note_filter)]
