@@ -1,3 +1,6 @@
+"""
+Menu module for notebook
+"""
 import sys
 from notebook import Notebook, Note
 class Menu:
@@ -14,6 +17,9 @@ class Menu:
 
 
     def display_menu(self):
+        """
+        Displays menu.
+        """
         print("""
 Notebook Menu
 1. Show all Notes
@@ -37,6 +43,9 @@ Notebook Menu
 
 
     def show_notes(self, notes=None):
+        """
+        Shows all notes.
+        """
         if not notes:
             notes = self.notebook.notes
         for note in notes:
@@ -45,29 +54,42 @@ Notebook Menu
 
 
     def search_notes(self):
-        filter = input("Search for: ")
-        notes = self.notebook.search(filter)
+        """
+        Allows user to search for a note.
+        """
+        note_filter = input("Search for: ")
+        notes = self.notebook.search(note_filter)
         self.show_notes(notes)
 
 
     def add_note(self):
+        """
+        Allows user to add note.
+        """
         memo = input("Enter a memo: ")
         self.notebook.new_note(memo)
         print("Your note has been added.")
 
 
     def modify_note(self):
-        id = input("Enter a note id: ")
+        """
+        Allows user to modify note
+        """
+        note_id = input("Enter a note id: ")
         memo = input("Enter a memo: ")
         tags = input("Enter tags: ")
         if memo:
-            self.notebook.modify_memo(id, memo)
+            self.notebook.modify_memo(note_id, memo)
         if tags:
-            self.notebook.modify_tags(id, tags)
+            self.notebook.modify_tags(note_id, tags)
 
 
     def quit(self):
+        """
+        Exits programm.
+        """
         print("Thank you for using your notebook today.")
         sys.exit(0)
+
 if __name__ == "__main__":
     Menu().run()
